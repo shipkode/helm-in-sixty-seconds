@@ -26,3 +26,45 @@
       kubernetes_flannel_manifest_file: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
       kubernetes_enable_web_ui: True
       kubernetes_apiserver_advertise_address: '127.0.0.1'
+    - andrewrothstein.unarchive-deps
+    - andrewrothstein.kubernetes-helm
+  tasks:
+    - name: Install and configure helm.
+      become: yes
+      become_user: vagrant
+      shell: |
+        helm init --service-account default
+        kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
+        helm repo update
+
+    # This is where we get the cluster ready for PVs.
+    # TODO: move this into a separate role.
+    # TODO: consider setting up kube api access via port forwarding.
+    # TODO: consider adding a host ip address for kube api access.
+    - name: Copy kubernetes manifests over.
+      copy:
+        src: "{{ item }}"
+        dest: "/home/vagrant/{{ item }}"
+        owner: vagrant
+        group: vagrant
+        mode: 0644
+      loop:
+        - pv-local-storage-class.yml
+        - pv-local-storage-volume.yml
+        - pv-local-storage-claim.yml
+    - name: Setup kubernetes configuration
+      become: yes
+      become_user: vagrant
+      shell: |
+        kubectl create -f "{{ item }}"
+      loop:
+        - pv-local-storage-class.yml
+        - pv-local-storage-volume.yml
+        - pv-local-storage-claim.yml
+    - name: Create mountpoint for PVs
+      file:
+        path: /mnt/data
+        state: directory
+        owner: root
+        group: root
+        mode: 0775

@@ -52,3 +52,17 @@
 
 - include_tasks: node-setup.yml
   when: kubernetes_role == 'node'
+
+# Copy config to the write place.
+- name: Create kube config directory
+  file:
+    path: /home/vagrant/.kube
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 0775
+
+- name: Setup kubernetes configuration
+  shell: |
+    cp /etc/kubernetes/admin.conf /home/vagrant/.kube/config
+    chown vagrant:vagrant /home/vagrant/.kube/config

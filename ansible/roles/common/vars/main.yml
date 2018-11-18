@@ -1,0 +1,25 @@
+services:
+  postgresql:
+    startcmd: "/bin/su - postgres -c '/usr/lib/postgresql/9.4/bin/postgres -s -D /opt/maglev/etc'"
+    stopcmd: "/bin/su - postgres -c '/usr/lib/postgresql/9.4/bin/pg_ctl -s -D /opt/maglev/etc stop'"
+  redis:
+    startcmd: "/usr/local/bin/redis-server  /opt/maglev/etc/redis_{{item.port}}.conf"
+    stopcmd:  "/usr/local/bin/redis-cli -p {{ item.port }} shutdown"
+  influxdb:
+    startcmd: "/usr/bin/influxd -config /opt/maglev/etc/influxdb.conf"
+    stopcmd:  "/usr/bin/killall influxd"
+  cassandra:
+     startcmd: "/opt/cassandra/bin/cassandra -f "
+     stopcmd: "/usr/bin/pkill -f CassandraDaemon"
+  kafka:
+     startcmd: "/opt/kafka_2.11-0.10.1.1/bin/kafka-server-start.sh /opt/maglev/etc/kafka-server.properties"
+     stopcmd: "/opt/kafka_2.11-0.10.1.1/bin/kafka-server-stop.sh"
+  zookeeper:
+     startcmd: "/opt/zookeeper-3.3.6/bin/zkServer.sh start /opt/maglev/etc/zoo.cfg"
+     stopcmd: "/opt/zookeeper-3.3.6/bin/zkServer.sh stop /opt/maglev/etc/zoo.cfg"
+  mongodb:
+     startcmd: "/usr/bin/mongod --config /opt/maglev/etc/mongodb.conf"
+     stopcmd:  "/usr/bin/killall mongod"
+  rabbitmq:
+    startcmd: "/usr/lib/rabbitmq/bin/rabbitmq-server start"
+    stopcmd: "/usr/lib/rabbitmq/bin/rabbitmq-server stop"

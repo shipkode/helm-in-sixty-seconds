@@ -1,0 +1,13 @@
+maglev:
+  archive: "javacontainer-1.1.2.tar"
+services:
+  - name: "schemaregistry"
+    archive: "schemaregistry.tar.gz"
+  - name: "pipelineruntime"
+    archive: "pipelineruntime.tar.gz"
+  - name: "pipelineadmin"
+    archive: "pipelineadmin.tar.gz"
+  - name: "queryengine"
+    archive: "queryengine.tar.gz"
+  - name: "nls"
+    archive: "nls.tar.gz"

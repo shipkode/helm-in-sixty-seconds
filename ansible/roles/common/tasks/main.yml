@@ -1,0 +1,15 @@
+---
+- name: Install pre-reqs
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - python-pip
+    - linux-headers-4.15.0-36-generic
+    - build-essential
+    - dkms
+    - unzip
+
+- name: Install python pre-reqs
+  pip:
+    name: docker

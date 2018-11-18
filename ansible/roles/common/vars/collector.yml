@@ -1,0 +1,9 @@
+services:
+  - name: "collector-manager"
+    archive: "collector-manager.tar.gz"
+  - name: "collector-agent"
+    archive: "collector-agent.tar.gz"
+  - name: "collector-telemetry"
+    archive: "collector-telemetry.tar.gz"
+  - name: "controller-server"
+    archive: "controller-server.tar.gz"

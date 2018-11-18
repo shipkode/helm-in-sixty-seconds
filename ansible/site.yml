@@ -1,0 +1,35 @@
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: yes
+  environment:
+    PATH: /home/vagrant/.pyenv/bin:{{ ansible_env.PATH }}
+  vars:
+    debug: False
+  roles:
+    - common
+    - role: ahuffman.resolv
+      resolv_nameservers:
+        - 8.8.8.8
+        - 8.8.4.4
+      resolv_domain: shipkode.com
+      resolv_options:
+        - timeout; 2
+        - rotate
+    - role: geerlingguy.docker
+      docker_users:
+        - vagrant
+    - freedomofpress.docker-registry
+    - role: geerlingguy.kubernetes
+      kubernetes_allow_pods_on_master: True
+      kubernetes_flannel_manifest_file_rbac: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+      kubernetes_flannel_manifest_file: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+      kubernetes_enable_web_ui: True
+      kubernetes_apiserver_advertise_address: '127.0.0.1'
+  tasks:
+    - name: Setup kubernetes configuration
+      shell: |
+        cp /etc/kubernetes/admin.conf /home/vagrant
+        echo "export KUBECONFIG=/home/vagrant/admin.conf" >> /home/vagrant/.profile
+        chown vagrant:vagrant /home/vagrant/admin.conf
+   

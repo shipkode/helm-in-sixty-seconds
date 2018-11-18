@@ -27,9 +27,14 @@
       kubernetes_enable_web_ui: True
       kubernetes_apiserver_advertise_address: '127.0.0.1'
   tasks:
+    - name: Create kube config directory
+      file:
+        path: /home/vagrant/.kube
+        state: directory
+        owner: vagrant
+        group: vagrant
+        mode: 0775
     - name: Setup kubernetes configuration
       shell: |
-        cp /etc/kubernetes/admin.conf /home/vagrant
-        echo "export KUBECONFIG=/home/vagrant/admin.conf" >> /home/vagrant/.profile
-        chown vagrant:vagrant /home/vagrant/admin.conf
-   
+        cp /etc/kubernetes/admin.conf /home/vagrant/.kube/config
+        chown vagrant:vagrant /home/vagrant/.kube/config

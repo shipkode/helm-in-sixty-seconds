@@ -83,7 +83,7 @@ Let's ssh into the VM and check it out:
     vagrant@helm1:~$
 
 Let's have a look at the current status of Persistent Volumes (pv),
-Persistenv Volume Claims (pvc), pods, and storage classes:
+Persistent Volume Claims (pvc), pods, and storage classes:
 
     vagrant@helm1:~$ watch kubectl get pv,pvc,pod,storageclass --all-namespaces
 

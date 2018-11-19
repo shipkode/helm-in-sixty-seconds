@@ -204,3 +204,5 @@ persistentvolume/local-storage-pv   10Gi       RWO            Retain           B
 * [Kubernetes Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/#local)
 * [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#claims-as-volumes)
 * [Kubernetes Local Volumes](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/)
+* [Kubernetes Claims as Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#claims-as-volumes)
+* [Kubernetes Configure Persistent Volume Storage](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage)

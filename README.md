@@ -198,6 +198,10 @@ persistentvolume/local-storage-pv   10Gi       RWO            Retain           B
     NAMESPACE   NAME                                        PROVISIONER                    AGE
                 storageclass.storage.k8s.io/local-storage   kubernetes.io/no-provisioner   55m
 
+## License
+
+Apache Software License 2.0.
+
 ## References
 
 * [Mysql Helm Chart](https://github.com/helm/charts/tree/master/stable/mysql)

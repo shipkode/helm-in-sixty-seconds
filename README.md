@@ -1,4 +1,4 @@
-# helm-in-sixty-seconds
+# Helm-in-sixty-seconds
 
 ## Getting started
 
@@ -21,7 +21,7 @@ At this point, you are ready to get started!
 
 ## Running
 
-### Creating your environment
+### Creating your VM
 
 You now are ready to standup your VM. Type in the commands below:
 
@@ -52,6 +52,8 @@ Check the current VM status:
     shut it down forcefully, or you can run `vagrant suspend` to simply
     suspend the virtual machine. In either case, to restart it again,
     simply run `vagrant up`.
+
+### Check Cluster Status
 
 Let's ssh into the VM and check it out:
 
@@ -109,11 +111,15 @@ Persistent Volume Claims (pvc), pods, and storage classes:
     NAMESPACE   NAME                                        PROVISIONER                    AGE
                 storageclass.storage.k8s.io/local-storage   kubernetes.io/no-provisioner   53m
 
+### Check Helm Installation
+
 As we can see, tiller is installed. Let's see what version of helm we are running:
 
     vagrant@helm1:~$ helm version
     Client: &version.Version{SemVer:"v2.11.0", GitCommit:"2e55dbe1fdb5fdb96b75ff144a339489417b146b", GitTreeState:"clean"}
     Server: &version.Version{SemVer:"v2.11.0", GitCommit:"2e55dbe1fdb5fdb96b75ff144a339489417b146b", GitTreeState:"clean"}
+
+### Install sample application using Helm
 
 Now, we'll install a sample application using helm (in this case mysql):
 

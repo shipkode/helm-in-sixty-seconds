@@ -184,7 +184,7 @@ Let's take a look at the state of the cluster:
     vagrant@helm1:~$ watch kubectl get pv,pvc,pod,storageclass --all-namespaces
 
     NAME                                CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS    CLAIM                         STORAGECLASS    REASON    AGE
-persistentvolume/local-storage-pv   10Gi       RWO            Retain           Bound     default/local-storage-claim   local-storage             55m
+    persistentvolume/local-storage-pv   10Gi       RWO            Retain           Bound     default/local-storage-claim   local-storage             55m
 
     NAMESPACE   NAME                                        STATUS    VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS    AGE
     default     persistentvolumeclaim/local-storage-claim   Bound     local-storage-pv   10Gi       RWO            local-storage   55m
